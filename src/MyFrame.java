@@ -17,19 +17,23 @@ public class MyFrame extends JFrame implements KeyListener, MouseMotionListener{
     ImageIcon icon;
     ImageIcon icon2;
 
-    MyPanel background;
+    JLabel background;
+
+    ImageIcon image;
 
 
 
     MyFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,500);
+        this.setSize(1000,1000);
         //Background
-        background = new MyPanel();
-        this.add(background);
-        this.setLayout(null);
-        this.addKeyListener(this);
-        icon = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\image.png");
+        background = new JLabel();
+        image = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\background.png");
+        background.setIcon(image);
+        background.setLayout(new FlowLayout());
+        //Characters
+        icon = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\billy.png");
+        System.out.println(icon.getIconHeight() + " " + icon.getIconWidth());
         icon2 = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\pixil-frame-0.png");
         label = new JLabel();
         label.setBounds(0, 0, 500, 500);
@@ -37,8 +41,11 @@ public class MyFrame extends JFrame implements KeyListener, MouseMotionListener{
         label2 = new JLabel();
         label2.setBounds(0,0,500,500);
         label2.setIcon(icon2);
-        this.add(label);
-        this.add(label2);
+        //Setting the Window
+        background.add(label);
+        background.add(label2);
+        this.add(background);
+        this.addKeyListener(this);
         this.setVisible(true);
     }
 
