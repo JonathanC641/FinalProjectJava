@@ -1,29 +1,42 @@
 import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class MyFrame extends JFrame implements KeyListener{
+public class MyFrame extends JFrame implements KeyListener, MouseMotionListener{
 
 
     JLabel label;
     JLabel label2;
+
     ImageIcon icon;
     ImageIcon icon2;
+
+    MyPanel background;
+
+
 
     MyFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500,500);
+        //Background
+        background = new MyPanel();
+        this.add(background);
         this.setLayout(null);
         this.addKeyListener(this);
         icon = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\image.png");
         icon2 = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\pixil-frame-0.png");
         label = new JLabel();
-        label.setBounds(0, 0, 100, 100);
+        label.setBounds(0, 0, 500, 500);
         label.setIcon(icon);
         label2 = new JLabel();
         label2.setBounds(0,0,500,500);
         label2.setIcon(icon2);
-        this.getContentPane().setBackground(Color.black);
         this.add(label);
         this.add(label2);
         this.setVisible(true);
@@ -58,22 +71,30 @@ public class MyFrame extends JFrame implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         //keyPressed = Invoked when a physical key is pressed down. Uses KeyCode, int output
-        switch(e.getKeyCode()) {
-            case 37: label.setLocation(label.getX()-10, label.getY());
-                break;
-            case 38: label.setLocation(label.getX(), label.getY()-10);
-                break;
-            case 39: label.setLocation(label.getX()+10, label.getY());
-                break;
-            case 40: label.setLocation(label.getX(), label.getY()+10);
-                break;
-        }
+//        switch(e.getKeyCode()) {
+//            case 37: label.setLocation(label.getX()-10, label.getY());
+//                break;
+//            case 38: label.setLocation(label.getX(), label.getY()-10);
+//                break;
+//            case 39: label.setLocation(label.getX()+10, label.getY());
+//                break;
+//            case 40: label.setLocation(label.getX(), label.getY()+10);
+//                break;
+//        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         //keyReleased = called whenever a button is released
-        System.out.println("You released key char: " + e.getKeyChar());
-        System.out.println("You released key code: " + e.getKeyCode());
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 }
