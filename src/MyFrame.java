@@ -53,7 +53,10 @@ public class MyFrame extends JFrame implements MouseListener, KeyListener, Mouse
     public void mousePressed(MouseEvent e) {
         System.out.println("Mouse Pressed!");
         if(e.getButton() == 1){
-            label2.setLocation(label2.getX()+3,label2.getY()+10);
+            System.out.println(e.getButton());
+            label2.setLocation(label2.getX()-10,label2.getY());
+        }else if(e.getButton() == 3){
+            label2.setLocation(label2.getX()+10, label2.getY());
         }
     }
 
@@ -78,9 +81,9 @@ public class MyFrame extends JFrame implements MouseListener, KeyListener, Mouse
     public void mouseWheelMoved(MouseWheelEvent e) {
         int scroll = e.getWheelRotation();
         if(scroll > 0){
-            label2.setLocation(label2.getX()-10, label2.getY());
+            label2.setLocation(label2.getX(), label2.getY()-10);
         }else{
-            label2.setLocation(label2.getX()+10, label2.getY());
+            label2.setLocation(label2.getX(), label2.getY()+10);
         }
 
     }
