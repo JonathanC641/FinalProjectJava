@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class MyFrame extends JFrame implements MouseListener, KeyListener, MouseWheelListener{
+public class MyFrame extends JFrame implements MouseListener, KeyListener, MouseWheelListener, ActionListener{
 
 
     JLabel label;
@@ -17,26 +17,30 @@ public class MyFrame extends JFrame implements MouseListener, KeyListener, Mouse
     ImageIcon billy;
     ImageIcon timmy;
 
+    MyPanel gameScreen;
 
-    MyPanel panel;
+    JPanel start;
+
+    JButton startButton;
+
+    JPanel mainPanel;
+    CardLayout cardLayout;
 
 
 
-    MyFrame(){
-        panel = new MyPanel();
+    MyFrame(){;
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+        start = new JPanel();
+        gameScreen = new MyPanel();
+        mainPanel.add(start,"start");
+        mainPanel.add(gameScreen,"game");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000,1000);
         this.setLayout(new FlowLayout());
-        //Characters
-        billy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\billy.png");
-        timmy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\pixil-frame-0.png");
-        label = new JLabel();
-        label2 = new JLabel();
-        label.setIcon(billy);
-        label2.setIcon(timmy);
-        this.add(label);
-        this.add(label2);
-        this.add(panel,BorderLayout.SOUTH);
+        gameSetup();
+        startPanel();
+        this.add(mainPanel);
         addKeyListener(this);
         addMouseListener(this);
         addMouseWheelListener(this);
@@ -44,16 +48,33 @@ public class MyFrame extends JFrame implements MouseListener, KeyListener, Mouse
     }
 
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println("Mouse Clicked!");
+    public void startPanel(){
+        start = new JPanel(new CardLayout());
+        startButton = new JButton();
+        startButton.setText("Start");
+        start.add(startButton);
+        startButton.addActionListener(this);
     }
+
+    public void gameSetup(){
+        gameScreen = new MyPanel();
+        billy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\billy.png");
+        timmy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\pixil-frame-0.png");
+        label = new JLabel();
+        label2 = new JLabel();
+    }
+
+    public void characterSetup(){
+        label.setIcon(billy);
+        label2.setIcon(timmy);
+        add(label);
+        add(label2);
+    }
+
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("Mouse Pressed!");
         if(e.getButton() == 1){
-            System.out.println(e.getButton());
             label2.setLocation(label2.getX()-10,label2.getY());
         }else if(e.getButton() == 3){
             label2.setLocation(label2.getX()+10, label2.getY());
@@ -61,35 +82,18 @@ public class MyFrame extends JFrame implements MouseListener, KeyListener, Mouse
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-        System.out.println("Mouse Released!");
-
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int scroll = e.getWheelRotation();
         if(scroll > 0){
-            label2.setLocation(label2.getX(), label2.getY()-10);
-        }else{
             label2.setLocation(label2.getX(), label2.getY()+10);
+        }else{
+            label2.setLocation(label2.getX(), label2.getY()-10);
         }
 
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         switch(e.getKeyChar()) {
             case 'a': label.setLocation(label.getX()-10, label.getY());
                 break;
@@ -100,18 +104,47 @@ public class MyFrame extends JFrame implements MouseListener, KeyListener, Mouse
             case 'd': label.setLocation(label.getX()+10, label.getY());
                 break;
         }
-
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-
+    public void actionPerformed(ActionEvent e) {
+        characterSetup();
+        System.out.println("test");
+        cardLayout.show(mainPanel,"game");
     }
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void mouseReleased(MouseEvent e) {}
 
-    }
+    @Override
+    public void mouseEntered(MouseEvent e) {}
 
-   
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+
+    @Override
+    public void keyReleased(KeyEvent e) {}
+
+
+
+
+
 }
