@@ -11,11 +11,7 @@ import java.io.IOException;
 public class MyFrame extends JFrame implements MouseListener, KeyListener, MouseWheelListener, ActionListener{
 
 
-    JLabel label;
-    JLabel label2;
 
-    ImageIcon billy;
-    ImageIcon timmy;
 
     MyPanel gameScreen;
 
@@ -33,14 +29,14 @@ public class MyFrame extends JFrame implements MouseListener, KeyListener, Mouse
         mainPanel = new JPanel(cardLayout);
         start = new JPanel();
         gameScreen = new MyPanel();
+        gameSetup();
+        startPanel();
         mainPanel.add(start,"start");
         mainPanel.add(gameScreen,"game");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000,1000);
         this.setLayout(new FlowLayout());
-        gameSetup();
-        startPanel();
-        this.add(mainPanel);
+        this.setContentPane(mainPanel);
         addKeyListener(this);
         addMouseListener(this);
         addMouseWheelListener(this);
@@ -56,59 +52,31 @@ public class MyFrame extends JFrame implements MouseListener, KeyListener, Mouse
         startButton.addActionListener(this);
     }
 
-    public void gameSetup(){
+    public void gameSetup() {
         gameScreen = new MyPanel();
-        billy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\billy.png");
-        timmy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\pixil-frame-0.png");
-        label = new JLabel();
-        label2 = new JLabel();
-    }
-
-    public void characterSetup(){
-        label.setIcon(billy);
-        label2.setIcon(timmy);
-        add(label);
-        add(label2);
     }
 
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(e.getButton() == 1){
-            label2.setLocation(label2.getX()-10,label2.getY());
-        }else if(e.getButton() == 3){
-            label2.setLocation(label2.getX()+10, label2.getY());
-        }
+        int num = e.getButton();
+        gameScreen.mouseCharacter(num,false);
     }
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int scroll = e.getWheelRotation();
-        if(scroll > 0){
-            label2.setLocation(label2.getX(), label2.getY()+10);
-        }else{
-            label2.setLocation(label2.getX(), label2.getY()-10);
-        }
-
+        gameScreen.mouseCharacter(scroll,true);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch(e.getKeyChar()) {
-            case 'a': label.setLocation(label.getX()-10, label.getY());
-                break;
-            case 'w': label.setLocation(label.getX(), label.getY()-10);
-                break;
-            case 's': label.setLocation(label.getX(), label.getY()+10);
-                break;
-            case 'd': label.setLocation(label.getX()+10, label.getY());
-                break;
-        }
+        char key = e.getKeyChar();
+        gameScreen.keyCharacter(key);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        characterSetup();
         System.out.println("test");
         cardLayout.show(mainPanel,"game");
     }
