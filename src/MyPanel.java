@@ -12,13 +12,13 @@ public class MyPanel extends JPanel{
     ImageIcon billy;
     ImageIcon timmy;
 
-    Image background;
+    Image stage;
 
 
 
     MyPanel(){
-        this.setPreferredSize(new Dimension(PANEL_WIDTH,PANEL_HEIGHT));
-        background = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\cliff.png").getImage();
+        ImageIcon background = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\cliff.png");
+        stage = background.getImage();
         billy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\billy.png");
         timmy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\pixil-frame-0.png");
         label = new JLabel();
@@ -29,10 +29,8 @@ public class MyPanel extends JPanel{
         this.add(label2);
     }
 
-    public void paint(Graphics g){
-        super.paint(g);
-        Graphics2D platform = (Graphics2D) g;
-        platform.drawImage(background,0,0,null);
+    public void paintComponent(Graphics g){
+        g.drawImage(stage,0,0,null);
     }
 
     public void mouseCharacter(int num, boolean scroll){

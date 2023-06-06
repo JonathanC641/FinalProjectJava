@@ -24,32 +24,43 @@ public class MyFrame extends JFrame implements MouseListener, KeyListener, Mouse
 
 
 
-    MyFrame(){;
+    MyFrame(){
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
-        start = new JPanel();
-        gameScreen = new MyPanel();
         gameSetup();
         startPanel();
         mainPanel.add(start,"start");
         mainPanel.add(gameScreen,"game");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000,1000);
-        this.setLayout(new FlowLayout());
-        this.setContentPane(mainPanel);
+        setSize(1000,1000);
+        setLayout(new FlowLayout());
+        setContentPane(mainPanel);
+
         addKeyListener(this);
         addMouseListener(this);
         addMouseWheelListener(this);
+
         this.setVisible(true);
     }
 
 
     public void startPanel(){
-        start = new JPanel(new CardLayout());
+        start = new JPanel();
         startButton = new JButton();
-        startButton.setText("Start");
+//        options = new JButton();
+        startButton.setText("RoughHouse");
+//        setBackground(Color.RED);
+//        options.setText("Options");
+//        super.paintComponent(graphics g)
+//        JLayeredPane layeredPane = new JLayeredPane();
+//        setContentPane(layeredPane);
+////        Image image = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\billy.png").getImage();
+////        g.drawImage(image, 0, 0, getWidth(), getHeight(), this
+//        layeredPane.add(start,Integer.valueOf(1));
         start.add(startButton);
+//        start.add(options);
         startButton.addActionListener(this);
+//        options.addActionListener(this);
     }
 
     public void gameSetup() {
