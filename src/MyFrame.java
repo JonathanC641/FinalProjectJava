@@ -18,6 +18,7 @@ public class MyFrame extends JFrame implements ActionListener{
     JPanel start;
 
     JButton startButton;
+    ImageIcon title;
 
     JPanel mainPanel;
     CardLayout cardLayout;
@@ -54,16 +55,6 @@ public class MyFrame extends JFrame implements ActionListener{
         start.setBackground(Color.black);
         start.setOpaque(true);
         startButton.setText("RoughHouse");
-//        setBackground(Color.RED);
-//        options.setText("Options");
-//        super.paintComponent(graphics g)
-//        JLayeredPane layeredPane = new JLayeredPane();
-//        setContentPane(layeredPane);
-////        Image image = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\billy.png").getImage();
-////        g.drawImage(image, 0, 0, getWidth(), getHeight(), this
-//        layeredPane.add(start,Integer.valueOf(1));
-        start.add(startButton);
-//        start.add(options);
         startButton.addActionListener(this);
         start.add(startButton);
         start.add(title);
