@@ -1,8 +1,10 @@
 import java.awt.*;
+import java.awt.event.*;
+import java.security.Key;
 
 import javax.swing.*;
 
-public class MyPanel extends JPanel{
+public class MyPanel extends JPanel implements MouseListener, MouseWheelListener, KeyListener {
     final int PANEL_WIDTH = 500;
     final int PANEL_HEIGHT = 500;
 
@@ -27,28 +29,45 @@ public class MyPanel extends JPanel{
         label2.setIcon(timmy);
         this.add(label);
         this.add(label2);
+        addKeyListener(this);
+        addMouseListener(this);
+        addMouseWheelListener(this);
     }
 
     public void paintComponent(Graphics g){
         g.drawImage(stage,0,0,null);
     }
 
-    public void mouseCharacter(int num, boolean scroll){
-        if(scroll){
-            if(num > 0){
-                label2.setLocation(label2.getX(), label2.getY()+10);
-            }else{
-                label2.setLocation(label2.getX(), label2.getY()-10);
-            }
-        }else if (num == 1){
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int num  = e.getButton();
+        if(num == 1){
             label2.setLocation(label2.getX()-10,label2.getY());
+
         }else if(num == 3){
             label2.setLocation(label2.getX()+10,label2.getY());
+
         }
     }
 
-    public void keyCharacter(char key){
-        switch(key) {
+
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        int num = e.getScrollAmount();
+        if(num > 0){
+            label2.setLocation(label2.getX(), label2.getY()+10);
+
+        }else{
+            label2.setLocation(label2.getX(), label2.getY()-10);
+
+        }
+    }
+
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch(e.getKeyChar()) {
             case 'a': label.setLocation(label.getX()-10,label.getY());
                 break;
             case 'w': label.setLocation(label.getX(), label.getY()-10);
@@ -58,18 +77,19 @@ public class MyPanel extends JPanel{
             case 'd': label.setLocation(label.getX()+10, label.getY());
                 break;
         }
-
+        repaint();
     }
 
-
-    public JLabel getCharacter(){
-        return label;
-    }
-
-    public JLabel getCharacter2(){
-        return label2;
-    }
-
-
-
+    @Override
+    public void keyReleased(KeyEvent e) {}
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
+    @Override
+    public void keyTyped(KeyEvent e) {}
 }
