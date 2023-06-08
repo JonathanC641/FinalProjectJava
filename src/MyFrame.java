@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,7 +19,6 @@ public class MyFrame extends JFrame implements ActionListener{
     JPanel start;
 
     JButton startButton;
-    ImageIcon title;
 
     JPanel mainPanel;
     CardLayout cardLayout;
@@ -49,15 +49,16 @@ public class MyFrame extends JFrame implements ActionListener{
     public void startPanel(){
         start = new JPanel();
         startButton = new JButton();
-        JLabel title = new JLabel();
         ImageIcon image = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\b3943d0f58551f418d8d465fd7c36fbd.png");
-        title.setIcon(image);
+        Icon icon = image;
+        Border emptyBorder = BorderFactory.createEmptyBorder();
+        startButton.setBorder(emptyBorder);
+        startButton.setIcon(icon);
+        startButton.setBackground(Color.black);
         start.setBackground(Color.black);
         start.setOpaque(true);
-        startButton.setText("RoughHouse");
         startButton.addActionListener(this);
         start.add(startButton);
-        start.add(title);
     }
 
     public void gameSetup() {
