@@ -39,9 +39,7 @@ public class MyFrame extends JFrame implements ActionListener{
         setSize(1000,1000);
 //        setLayout(new FlowLayout());
         setContentPane(mainPanel);
-
-
-
+        setSize(1920,909);
         this.setVisible(true);
     }
     

@@ -5,8 +5,8 @@ import java.security.Key;
 import javax.swing.*;
 
 public class MyPanel extends JPanel implements MouseListener, MouseWheelListener, KeyListener {
-    final int PANEL_WIDTH = 500;
-    final int PANEL_HEIGHT = 500;
+//    final int PANEL_WIDTH = 500;
+//    final int PANEL_HEIGHT = 500;
 
     JLabel label;
     JLabel label2;
@@ -43,10 +43,8 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
         int num  = e.getButton();
         if(num == 1){
             label2.setLocation(label2.getX()-10,label2.getY());
-
         }else if(num == 3){
             label2.setLocation(label2.getX()+10,label2.getY());
-
         }
     }
 
@@ -54,10 +52,11 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        int num = e.getScrollAmount();
-        if(num < 0){
+        int num = e.getWheelRotation();
+        System.out.println(num);
+        if(num > 0){
             label2.setLocation(label2.getX(), label2.getY()+10);
-        }else if (num > 0){
+        }else{
             label2.setLocation(label2.getX(), label2.getY()-10);
         }
     }
