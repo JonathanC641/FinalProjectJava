@@ -19,10 +19,10 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
 
 
     MyPanel(){
-        ImageIcon background = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\cliff.png");
+        ImageIcon background = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\cliff.png");
         stage = background.getImage();
-        billy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\billy.png");
-        timmy = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\pixil-frame-0.png");
+        billy = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\billy.png");
+        timmy = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\pixil-frame-0.png");
         label = new JLabel();
         label2 = new JLabel();
         label.setIcon(billy);
@@ -55,12 +55,10 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int num = e.getScrollAmount();
-        if(num > 0){
+        if(num < 0){
             label2.setLocation(label2.getX(), label2.getY()+10);
-
-        }else{
+        }else if (num > 0){
             label2.setLocation(label2.getX(), label2.getY()-10);
-
         }
     }
 
@@ -77,7 +75,6 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
             case 'd': label.setLocation(label.getX()+10, label.getY());
                 break;
         }
-        repaint();
     }
 
     @Override
