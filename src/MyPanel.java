@@ -4,30 +4,27 @@ import java.security.Key;
 import javax.swing.*;
 
 public class MyPanel extends JPanel implements MouseListener, MouseWheelListener, KeyListener {
-//    final int PANEL_WIDTH = 500;
-//    final int PANEL_HEIGHT = 500;
 
     JLabel label;
     JLabel label2;
 
     ImageIcon billy;
     ImageIcon timmy;
-
     ImageIcon hurtBilly;
     ImageIcon hurtTimmy;
-
-
     Image stage;
 
+    private boolean boundsCheck;
 
 
     MyPanel(){
+        creatingCharacters();
         ImageIcon background = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\MountainStage.png");
         stage = background.getImage();
-        creatingCharacters();
-
-        this.add(label);
-        this.add(label2);
+        add(label);
+        add(label2);
+        label.setLocation(450,965);
+        label2.setLocation(600,930);
         addKeyListener(this);
         addMouseListener(this);
         addMouseWheelListener(this);
@@ -35,20 +32,18 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
 
     public void paintComponent(Graphics g){
         g.drawImage(stage,0,0,null);
-
     }
 
 
     public void creatingCharacters(){
-        billy = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\Billy.png");
+        billy = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\Billy (1).png");
         timmy = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\Timmy.png");
+        hurtTimmy = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\hurtTimmy.png");
         hurtBilly = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\hurtBilly.png");
         label = new JLabel();
         label.setIcon(billy);
         label2 = new JLabel();
         label2.setIcon(timmy);
-        label.setLocation(0,-50);
-        label2.setLocation(0,-50);
     }
 
     @Override
@@ -66,6 +61,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
+        //  Min Height Bound = 930
 //        int num = e.getWheelRotation();
 //        System.out.println(num);
 //        if(num > 0){
@@ -79,15 +75,35 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
     @Override
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyChar()) {
-            case 'a': label.setLocation(label.getX()-10,label.getY());            System.out.println(label.getLocation());
+            case 'a':
+                boundsCheck= label.getX() - 10 >= 100;
+                if(boundsCheck) {
+                    label.setLocation(label.getX() - 10, label.getY());
+                }
+                System.out.println(label.getLocation());
                 break;
-            case 'w': label.setLocation(label.getX(), label.getY()-10);            System.out.println(label.getLocation());
+            case 'w':
+                boundsCheck = label.getY() - 10 >= 935;
+                if(boundsCheck){
+                    label.setLocation(label.getX(), label.getY()-10);
+                    System.out.println(label.getLocation());
+                }
                 break;
-            case 's': label.setLocation(label.getX(), label.getY()+10);            System.out.println(label.getLocation());
+            case 's':
+                boundsCheck = label.getY() + 10 <= 965;
+                if(boundsCheck){
+                    label.setLocation(label.getX(), label.getY()+10);
+                    System.out.println(label.getLocation());
+                }
                 break;
-            case 'd': label.setLocation(label.getX()+10, label.getY());            System.out.println(label.getLocation());
+            case 'd':
+                boundsCheck = label.getX() + 10 < 1050;
+                if(boundsCheck) {
+                    label.setLocation(label.getX() + 10, label.getY());
+                }
+                System.out.println(label.getLocation());
                 break;
-            case 'e':
+            case 'e': attack();
                 break;
         }
     }
@@ -98,7 +114,6 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
         }
         label.setIcon(billy);
     }
-
 
 
     @Override
