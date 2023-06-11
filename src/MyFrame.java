@@ -36,10 +36,8 @@ public class MyFrame extends JFrame implements ActionListener{
 
         mainPanel.add(start,"start");
         mainPanel.add(gameScreen,"game");
-        setSize(1000,1000);
-//        setLayout(new FlowLayout());
         setContentPane(mainPanel);
-        setSize(1920,909);
+        setSize(1450,1450);
         this.setVisible(true);
     }
     
