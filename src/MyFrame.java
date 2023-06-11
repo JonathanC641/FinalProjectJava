@@ -31,8 +31,7 @@ public class MyFrame extends JFrame implements ActionListener{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
-        gameSetup();
-        startPanel();
+        panelsSetup();
 
         mainPanel.add(start,"start");
         mainPanel.add(gameScreen,"game");
@@ -42,7 +41,8 @@ public class MyFrame extends JFrame implements ActionListener{
     }
     
 
-    public void startPanel(){
+    public void panelsSetup(){
+        gameScreen = new MyPanel();
         start = new JPanel();
         startButton = new JButton();
         ImageIcon image = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\b3943d0f58551f418d8d465fd7c36fbd.png");
@@ -56,11 +56,6 @@ public class MyFrame extends JFrame implements ActionListener{
         startButton.addActionListener(this);
         start.add(startButton);
     }
-
-    public void gameSetup() {
-        gameScreen = new MyPanel();
-    }
-
 
 
     @Override
