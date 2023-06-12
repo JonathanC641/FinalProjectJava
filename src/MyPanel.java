@@ -36,18 +36,20 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
         addKeyListener(this);
         addMouseListener(this);
         addMouseWheelListener(this);
-
     }
+    
+
 
     public void paintComponent(Graphics g){
         g.drawImage(stage,0,0,null);
         if(once){
             label.setLocation(1000,965);
             label2.setLocation(140,925);
-            THealth.setLocation(45, 5);
+            THealth.setLocation(1, 5);
             BHealth.setLocation(980,5);
             once = false;
         }
+      
     }
 
 
@@ -65,80 +67,78 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
     @Override
     public void mousePressed(MouseEvent e) {
         int num  = e.getButton();
-        if(num == 1) {
-            label2.setLocation(label2.getX() - 10, label2.getY());
-        }else if(num == 2){
-            int x1 = label.getX();
-            int x2 = label2.getX();
-            if(Math.abs(x1 - x2) <= 150 ) {
-                TAttack();
-                label.setIcon(hurtBilly);
-                label.setVisible(true);
-            } else if (Math.abs(x1 - x2) > 150) {
-                label.setIcon(billy);
-                label.setVisible(true);
+        if(BHealth.getValue() == 0 || THealth.getValue() == 0){
+            GameOver();
+        }else {
+            if (num == 1) {
+                label2.setLocation(label2.getX() - 10, label2.getY());
+            } else if (num == 2) {
+                int x1 = label.getX();
+                int x2 = label2.getX();
+                if (Math.abs(x1 - x2) <= 150) {
+                    TAttack();
+                    label.setIcon(hurtBilly);
+                    label.setVisible(true);
+                } else if (Math.abs(x1 - x2) > 150) {
+                    label.setIcon(billy);
+                    label.setVisible(true);
+                }
+            } else if (num == 3) {
+                label2.setLocation(label2.getX() + 10, label2.getY());
             }
-        }else if (num == 3){
-            label2.setLocation(label2.getX()+10,label2.getY());
         }
     }
 
 
 
 
-    @Override
-    public void mouseWheelMoved(MouseWheelEvent e) {
-        //  Min Height Bound = 930
-        int num = e.getWheelRotation();
-        boundsCheck = label2.getY() + 10 < 930;
-        if(num > 0 && boundsCheck){
-            label2.setLocation(label2.getX(), label2.getY()+10);
-        }else if (label2.getY() + 10 >= 960){
-            label2.setLocation(label2.getX(), label2.getY()-10);
-        }
-    }
 
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch(e.getKeyChar()) {
-            case 'a':
-                boundsCheck= label.getX() - 10 >= 100;
-                if(boundsCheck) {
-                    label.setLocation(label.getX() - 10, label.getY());
-                    System.out.println(label.getX());
-                }
-                break;
-            case 'w':
-                boundsCheck = label.getY() - 10 >= 956;
-                if(boundsCheck){
-                    label.setLocation(label.getX(), label.getY()-10);
-                }
-                break;
-            case 's':
-                boundsCheck = label.getY() + 10 <= 965;
-                if(boundsCheck){
-                    label.setLocation(label.getX(), label.getY()+10);
-                }
-                break;
-            case 'd':
-                boundsCheck = label.getX() + 10 < 1050;
-                if(boundsCheck) {
-                    label.setLocation(label.getX() + 10, label.getY());
-                }
-                break;
-            case 'e':
-                int x1 = label.getX();
-                int x2 = label2.getX();
-                if(Math.abs(x2 - x1) <= 150 ) {
-                    BAttack();
-                    label2.setIcon(hurtTimmy);
-                    label2.setVisible(true);
-                } else if (Math.abs(x2 - x1) > 150) {
-                    label2.setIcon(timmy);
-                    label2.setVisible(true);
-                }
-                break;
+        if(BHealth.getValue() == 0 || THealth.getValue() == 0){
+            GameOver();
+        }else {
+            switch (e.getKeyChar()) {
+                case 'a':
+                    boundsCheck = label.getX() - 10 >= 100;
+                    if (boundsCheck) {
+                        label.setLocation(label.getX() - 10, label.getY());
+                        System.out.println(label.getX());
+                    }
+                    break;
+                case 'w':
+                    boundsCheck = label.getY() - 10 >= 956;
+                    if (boundsCheck) {
+                        label.setLocation(label.getX(), label.getY() - 10);
+                    }
+                    break;
+                case 's':
+                    boundsCheck = label.getY() + 10 <= 965;
+                    if (boundsCheck) {
+                        label.setLocation(label.getX(), label.getY() + 10);
+                    }
+                    break;
+                case 'd':
+                    boundsCheck = label.getX() + 10 < 1050;
+                    if (boundsCheck) {
+                        label.setLocation(label.getX() + 10, label.getY());
+                    }
+                    break;
+                case 'e':
+                    int x1 = label.getX();
+                    int x2 = label2.getX();
+                    if (Math.abs(x2 - x1) <= 150) {
+                        BAttack();
+                        label2.setIcon(hurtTimmy);
+                        label2.setVisible(true);
+                    } else if (Math.abs(x2 - x1) > 150) {
+                        label2.setIcon(timmy);
+                        label2.setVisible(true);
+                    }
+
+                    break;
+            }
         }
     }
 
@@ -165,6 +165,24 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
         THealth.setPreferredSize(new Dimension(500,50));
     }
 
+    public void GameOver(){
+        JLabel gameOver = new JLabel();
+        ImageIcon over = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\GameOver.png");
+        gameOver.setIcon(over);
+        label.setIcon(billy);
+        label2.setIcon(timmy);
+        BHealth.setValue(100);
+        THealth.setValue(100);
+        add(gameOver);
+        once = true;
+        gameOver.setPreferredSize(new Dimension(750,500));
+        gameOver.setLocation(100,725);
+        revalidate();
+        repaint();
+    }
+
+
+
     @Override
     public void keyReleased(KeyEvent e) {}
     @Override
@@ -176,7 +194,7 @@ public class MyPanel extends JPanel implements MouseListener, MouseWheelListener
     @Override
     public void mouseExited(MouseEvent e) {}
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) {}
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {}
 }
