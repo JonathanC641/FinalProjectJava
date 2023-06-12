@@ -36,7 +36,7 @@ public class MyFrame extends JFrame implements ActionListener{
         mainPanel.add(start,"start");
         mainPanel.add(gameScreen,"game");
         setContentPane(mainPanel);
-        setSize(1450,1450);
+        setSize(1080,1080);
         this.setVisible(true);
     }
     
@@ -45,7 +45,7 @@ public class MyFrame extends JFrame implements ActionListener{
         gameScreen = new MyPanel();
         start = new JPanel();
         startButton = new JButton();
-        ImageIcon image = new ImageIcon("C:\\Users\\omarj\\IdeaProjects\\FinalProjectJava\\src\\b3943d0f58551f418d8d465fd7c36fbd.png");
+        ImageIcon image = new ImageIcon("C:\\Users\\student\\IdeaProjects\\FinalProjectJava\\src\\b3943d0f58551f418d8d465fd7c36fbd.png");
         Icon icon = image;
         Border emptyBorder = BorderFactory.createEmptyBorder();
         startButton.setBorder(emptyBorder);
